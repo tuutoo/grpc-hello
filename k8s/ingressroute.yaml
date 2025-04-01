@@ -1,0 +1,15 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grpc-ingress
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`grpc.k8s.sohot.app`)
+      kind: Rule
+      services:
+        - name: grpc-hello
+          port: 50051
+          scheme: h2c
+  tls: {}
